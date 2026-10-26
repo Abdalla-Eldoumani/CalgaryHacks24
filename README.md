@@ -1,44 +1,49 @@
-# Budget Buddy: Empowering Financial Futures
+# Budget Buddy
 
-## Introduction
+A small Next.js site about personal finance for young Canadians, built as a team project at CalgaryHacks 2024. It has short explainer pages on TFSAs and FHSAs, a page of sample stock picks with a five-year growth estimate, and a link out to a separate budgeting app.
 
-In a world where the stock market is often seen as inaccessible or intimidating, especially to younger generations, Budget Buddy emerges as a beacon of empowerment. Recognizing that a staggering 70% of young Canadians steer clear of investing in their future through the stock market, we've set out to demystify the investment landscape. Our mission is clear: to furnish users with reliable, easy-to-understand information about investment opportunities, enabling them to make informed decisions about their financial futures.
+This is a hackathon prototype. The content is static and written by the team; nothing on the site is financial advice.
 
-## About Budget Buddy
+## What is in it
 
-Budget Buddy is more than just a financial tool; it's your companion in navigating the complexities of personal finance. Designed to keep users on track with their budgets, it provides a transparent view of where money is going, encouraging smarter spending and saving habits. Through our platform, users gain access to:
+- **Sign-in:** Clerk handles sign-up and sign-in. The middleware protects every route, so you sign in before seeing any page.
+- **Learn More** (`/learn-more`, `/tfsa`, `/fhsa`): text pages on Tax-Free Savings Accounts, First Home Savings Accounts, and the basics of stocks, bonds and cash.
+- **Invest** (`/invest`): stock picks grouped into seven sectors, hard-coded in the page with a description and a "return last year" figure for each. Enter an amount, click a ticker, and an alert shows what that amount would become after five years at last year's return, compounded yearly. There are no live market prices.
+- **Budget** (`/budget`): a page that links to the budget tracker, which is a separate app hosted at [budget-buddy-theta.vercel.app](https://budget-buddy-theta.vercel.app/). The tracker's code is not in this repo.
+- **Dashboard** (`/dashboard`): a long marketing-style layout explaining the idea, with images served from builder.io.
 
-- **Up-to-Date Information:** From savings accounts to investment opportunities, we provide the latest data to help you make precise financial decisions.
-- **Real-Time Stock Data:** Explore a vast array of sectors within the stock market, equipped with real-time data to inform your investment choices.
-- **Projection Tools:** Visualize the potential growth of your investments, empowering you to plan for a brighter financial future.
+## Stack
 
-## Technologies Used
+Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS, shadcn/ui, and Clerk (`@clerk/nextjs` v4).
 
-To bring Budget Buddy to life, we leveraged the power of modern web development technologies:
+## Run it locally
 
-- **Next.js:** The second-best React.js framework, offering robust features for building interactive user interfaces.
-- **TailwindCSS:** A utility-first CSS framework for creating custom designs without leaving your HTML.
-- **TypeScript:** Enhancing our development process with strong typing to catch errors early.
-- **Clerk:** For secure, seamless authentication processes.
-- **Vanilla JavaScript & React:** The core of our budget calculator, providing a user-friendly experience.
-- **Vercel:** Our choice for hosting, ensuring that Budget Buddy is accessible anywhere, anytime.
+You need Node.js 18.17 or later and a Clerk application (the free tier works).
 
-## Challenges & Triumphs
+1. Install dependencies:
 
-Our journey wasn't without its hurdles. From the overwhelming initial phases to technical challenges integrating features like the budget calculator, we faced each obstacle head-on. Despite these challenges, our determination never wavered. We're proud of the resilience and teamwork that brought Budget Buddy from concept to reality, providing a tool that meets and exceeds our initial vision.
+   ```bash
+   npm install
+   ```
 
-## What We Learned
+2. Create `.env.local` in the project root with your Clerk keys:
 
-This project was a profound learning experience for our team. Not only did we enhance our technical skills in web development and get hands-on experience with React, JavaScript, and version control with Git, but we also deepened our understanding of teamwork and project management. These lessons will be invaluable as we continue to develop and improve Budget Buddy.
+   ```bash
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+   CLERK_SECRET_KEY=sk_test_...
+   ```
 
-## Looking Ahead
+3. Start the dev server and open http://localhost:3000:
 
-The future of Budget Buddy is bright. We're not stopping here; we plan to:
+   ```bash
+   npm run dev
+   ```
 
-- **Expand our budget tool:** Introducing features that allow users to compare their financial habits over time and set accountability goals.
-- **Broaden our investment guidance:** Providing comprehensive information on ETFs, cryptocurrencies, and other financial products.
-- **Launch community forums:** Creating a space for Canadian investors to connect with certified financial planners, fostering a supportive financial community.
+Other scripts: `npm run build`, `npm start`, and `npm run lint`.
 
-## Join Us
+## Limitations
 
-We invite you to embark on this financial journey with Budget Buddy. Whether you're looking to get a handle on your spending, explore the stock market, or plan for your financial future, Budget Buddy is here to guide you every step of the way.
+- Stock data and returns are fixed values typed into the page, not fetched from a market API.
+- The growth estimate assumes last year's return repeats for five years.
+- The "Share on Instagram" button opens instagram.com with the text in the URL; Instagram does not read it.
+- Several pages turn off ESLint for the whole file.
